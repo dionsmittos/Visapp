@@ -4,6 +4,7 @@ import L from 'leaflet'
 import { FISHING_ZONES, MAP_CENTER, INITIAL_ZOOM, STATUS_COLORS } from '../utils/fishingData'
 import { fetchWaterFeaturesFromOverpass } from '../utils/api'
 import { createMarkerIcon } from '../utils/mapUtils'
+import { requestUserLocation } from '../utils/geolocationUtils'
 import Legend from './Legend'
 import LoadingScreen from './LoadingScreen'
 import './FishingMap.css'
@@ -20,74 +21,12 @@ function MapController({ onLocationFound }) {
     locateButton.onAdd = () => {
       const div = L.DomUtil.create('div', 'locate-button')
       div.innerHTML = '📍'
-      div.title = 'Mijn locatie weergeven'
+      div.title = 'Klik voor jouw locatie (vraagt toestemming)'
+      div.setAttribute('aria-label', 'Toon mijn locatie op kaart')
       
       L.DomEvent.on(div, 'click', (e) => {
         L.DomEvent.stopPropagation(e)
-        
-        if (navigator.geolocation) {
-          div.style.opacity = '0.5'
-          
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              const { latitude, longitude } = position.coords
-              const userLat = latitude
-              const userLng = longitude
-              
-              // Center map on user
-              map.setView([userLat, userLng], 15)
-              
-              // Remove old marker if exists
-              if (userMarkerRef.current) {
-                map.removeLayer(userMarkerRef.current)
-              }
-              
-              // Add new blue marker with circle
-              const blueIcon = L.divIcon({
-                html: `
-                  <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="20" cy="20" r="18" fill="none" stroke="#3b82f6" stroke-width="2" opacity="0.3"/>
-                    <circle cx="20" cy="20" r="12" fill="#3b82f6" stroke="white" stroke-width="2"/>
-                    <circle cx="20" cy="20" r="5" fill="white"/>
-                  </svg>
-                `,
-                iconSize: [40, 40],
-                iconAnchor: [20, 20],
-                popupAnchor: [0, -20]
-              })
-              
-              userMarkerRef.current = L.marker([userLat, userLng], { icon: blueIcon })
-                .addTo(map)
-                .bindPopup('📍 Jouw huidige locatie')
-              
-              div.style.opacity = '1'
-              onLocationFound?.()
-            },
-            (error) => {
-              div.style.opacity = '1'
-              console.error('Geolocation error:', error)
-              
-              let message = 'Locatie kon niet bepaald worden.'
-              if (error.code === 1) {
-                message = 'Geef toestemming voor locatiebepaling.'
-              } else if (error.code === 2) {
-                message = 'Locatie niet beschikbaar.'
-              } else if (error.code === 3) {
-                message = 'Timeout bij locatiebepaling.'
-              }
-              
-              alert(message)
-            },
-            {
-              enableHighAccuracy: true,
-              timeout: 10000,
-              maximumAge: 0
-            }
-          )
-        } else {
-          alert('Geolocation wordt niet ondersteund door je browser.')
-          div.style.opacity = '1'
-        }
+        requestUserLocation(div, map, userMarkerRef, onLocationFound)
       })
       
       return div
