@@ -1,14 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Legend.css'
 
 function Legend() {
   const [isExpanded, setIsExpanded] = useState(false)
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   return (
     <div className={`legend ${isExpanded ? 'expanded' : 'collapsed'}`}>
       <div 
         className="legend-header"
         onClick={() => setIsExpanded(!isExpanded)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.key === 'Enter' && setIsExpanded(!isExpanded)}
       >
         <div className="legend-title">ℹ️ Legenda</div>
         <div className={`legend-toggle ${isExpanded ? 'open' : 'closed'}`}>

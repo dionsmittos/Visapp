@@ -30,6 +30,7 @@
   background: white;
   border-radius: 8px;
   transition: background-color 0.2s;
+  min-height: 44px;
 }
 
 .legend-header:hover {

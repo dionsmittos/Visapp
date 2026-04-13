@@ -13,6 +13,7 @@ body {
   background-color: #f5f5f5;
   -webkit-user-select: none;
   user-select: none;
+  touch-action: manipulation;
 }
 
 #root {
@@ -27,20 +28,30 @@ html, body {
   -webkit-touch-callout: none;
 }
 
-/* Leaflet overrides for mobile */
+/* Leaflet overrides for optimal mobile performance */
 .leaflet-container {
   font-family: inherit;
-  background-color: #e0e0e0;
+  background-color: #e8e8e8;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+.leaflet-tile {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 .leaflet-popup-content-wrapper {
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  max-width: 90vw;
 }
 
 .leaflet-popup-content {
   font-size: 14px;
   line-height: 1.5;
+  max-height: 60vh;
+  overflow-y: auto;
 }
 
 /* High DPI support */
@@ -50,10 +61,11 @@ html, body {
   }
 }
 
-/* Touch-friendly popups */
+/* Touch-friendly optimizations */
 @media (max-width: 768px) {
   .leaflet-popup-content {
     font-size: 13px;
+    max-height: 50vh;
   }
   
   .leaflet-popup-tip-container {
@@ -62,5 +74,13 @@ html, body {
 
   .leaflet-control-container {
     font-size: 18px;
+  }
+
+  .leaflet-control {
+    touch-action: manipulation;
+  }
+
+  * {
+    touch-action: manipulation;
   }
 }

@@ -205,12 +205,19 @@ function FishingMap() {
         className="map"
         ref={mapRef}
         attributionControl={true}
+        preferCanvas={true}
+        zoomControl={false}
+        touchZoom={true}
+        dragging={true}
+        inertia={true}
       >
-        {/* Base layer - OpenStreetMap */}
+        {/* Base layer - High quality tiles */}
         <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | &copy; <a href="https://stadiamaps.com/">Stadia Maps</a>'
           maxZoom={19}
+          minZoom={1}
+          crossOrigin="anonymous"
         />
 
         {/* Water features from API */}
