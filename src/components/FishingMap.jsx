@@ -149,14 +149,17 @@ function FishingMap() {
         touchZoom={true}
         dragging={true}
         inertia={true}
+        maxNativeZoom={18}
       >
-        {/* Base layer - High quality tiles */}
+        {/* Base layer - High quality tiles with Retina support */}
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           maxZoom={19}
           minZoom={1}
           crossOrigin="anonymous"
+          className="leaflet-tile-retina"
+          detectRetina={true}
         />
 
         {/* Water features from API */}

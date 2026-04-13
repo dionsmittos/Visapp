@@ -41,23 +41,26 @@ html, body {
   image-rendering: crisp-edges;
 }
 
-.leaflet-popup-content-wrapper {
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  max-width: 90vw;
+.leaflet-tile-retina {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  width: 256px;
+  height: 256px;
 }
 
-.leaflet-popup-content {
-  font-size: 14px;
-  line-height: 1.5;
-  max-height: 60vh;
-  overflow-y: auto;
-}
-
-/* High DPI support */
+/* Ultra-sharp rendering on high DPI displays */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .leaflet-tile {
     image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  
+  .leaflet-tile-retina {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    transform: translate3d(0,0,0);
   }
 }
 
