@@ -111,42 +111,6 @@ export const FISHING_ZONES = [
     waterType: 'plas'
   },
   {
-    id: 'benthuizer-plas',
-    name: 'Benthuizer Plas',
-    city: 'Schiedam',
-    status: 'allowed',
-    lat: 51.8967,
-    lng: 4.3656,
-    federation: 'Sportvisserij Zuidwest Nederland',
-    rules: {
-      requiresVispas: true,
-      nightFishing: false,
-      seasonalBan: 'Snoek gesloten: 1 maart - 31 mei',
-      minSize: 'Karper min 35cm',
-      otherRules: 'VISpas vereist, maximaal 2 hengels'
-    },
-    description: 'Karper en brasem specialist plas. Goed onderhouden.',
-    waterType: 'plas'
-  },
-  {
-    id: 'midden-oudeneel',
-    name: 'Midden Oudeneel',
-    city: 'Delft',
-    status: 'allowed',
-    lat: 52.0167,
-    lng: 4.4050,
-    federation: 'Sportvisserij Zuidwest Nederland',
-    rules: {
-      requiresVispas: false,
-      nightFishing: true,
-      seasonalBan: 'Snoek gesloten: 1 maart - 31 mei',
-      minSize: 'Standaard Nederlands sportvisreglement',
-      otherRules: 'Vrij vissen, goed voor aal en schubvis'
-    },
-    description: 'Open water route tussen Delft en Den Haag. Veel aal en brasem.',
-    waterType: 'kanaal'
-  },
-  {
     id: 'delftse-hout',
     name: 'Delftse Hout',
     city: 'Delft',
@@ -237,60 +201,6 @@ export const FISHING_ZONES = [
     waterType: 'plas'
   },
   {
-    id: 'bentheizersveld',
-    name: 'Bentheizersveld/Kleine Lindekreek',
-    city: 'Schiedam',
-    status: 'allowed',
-    lat: 51.8911,
-    lng: 4.4200,
-    federation: 'Sportvisserij Zuidwest Nederland',
-    rules: {
-      requiresVispas: false,
-      nightFishing: true,
-      seasonalBan: 'Snoek gesloten: 1 maart - 31 mei',
-      minSize: 'Standaard Nederlands sportvisreglement',
-      otherRules: 'Vrij vissen, populair voor aal'
-    },
-    description: 'Natuurlijke watergang. Veel aal in zomermaanden.',
-    waterType: 'watergang'
-  },
-  {
-    id: 'lange-lindekreek',
-    name: 'Lange Lindekreek',
-    city: 'Schiedam',
-    status: 'allowed',
-    lat: 51.8856,
-    lng: 4.4556,
-    federation: 'Sportvisserij Zuidwest Nederland',
-    rules: {
-      requiresVispas: false,
-      nightFishing: true,
-      seasonalBan: 'Snoek gesloten: 1 maart - 31 mei',
-      minSize: 'Standaard Nederlands sportvisreglement',
-      otherRules: 'Open watergang, goed voor brasem'
-    },
-    description: 'Rustige watergang met brasem en blei.',
-    waterType: 'watergang'
-  },
-  {
-    id: 'edesche-wateren',
-    name: 'Edesche Wateren',
-    city: 'Rotterdam',
-    status: 'allowed',
-    lat: 51.8889,
-    lng: 4.4667,
-    federation: 'Sportvisserij Zuidwest Nederland',
-    rules: {
-      requiresVispas: true,
-      nightFishing: false,
-      seasonalBan: 'Snoek gesloten: 1 maart - 31 mei',
-      minSize: 'Karper min 35cm',
-      otherRules: 'VISpas vereist, vogelbroedgebied'
-    },
-    description: 'Grote plas, veel karper. Vogelgebied — gesloten in zomer.',
-    waterType: 'plas'
-  },
-  {
     id: 'waaltuin',
     name: 'Waaltuin Plas',
     city: 'Schiedam',
@@ -306,24 +216,6 @@ export const FISHING_ZONES = [
       otherRules: 'Vrij vissen, recreatiegebied'
     },
     description: 'Kleine plas bij recreatiegebied. Brasem en snoekbaars.',
-    waterType: 'plas'
-  },
-  {
-    id: 'nieuw-waarden',
-    name: 'Nieuw Waarden',
-    city: 'Schiedam',
-    status: 'allowed',
-    lat: 51.9422,
-    lng: 4.4889,
-    federation: 'Sportvisserij Zuidwest Nederland',
-    rules: {
-      requiresVispas: true,
-      nightFishing: true,
-      seasonalBan: 'Snoek gesloten: 1 maart - 31 mei',
-      minSize: 'Snoek min 45cm, Snoekbaars min 42cm',
-      otherRules: 'VISpas vereist, nachtvisserij toegestaan'
-    },
-    description: 'Snoek- en snoekbaars plas. VISpas vereist.',
     waterType: 'plas'
   },
   {
@@ -398,10 +290,6 @@ export const FISHING_ZONES = [
     description: 'Kleine plas in agrarisch gebied. Brasem en karper.',
     waterType: 'plas'
   },
-
-  // ==========================================
-  // NIEUWE CORRECTE LOCATIES
-  // ==========================================
   {
     id: 'nieuwe-maas',
     name: 'Nieuwe Maas',

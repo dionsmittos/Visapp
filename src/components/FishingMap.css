@@ -284,6 +284,23 @@
   border: 1px solid #fca5a5;
 }
 
+/* No results message */
+.no-results {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 16px 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  color: #6b7280;
+  text-align: center;
+  z-index: 500;
+  max-width: 300px;
+}
+
 /* Water line styling */
 .water-line {
   pointer-events: auto;

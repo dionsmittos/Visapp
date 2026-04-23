@@ -1,7 +1,6 @@
 import React from 'react'
+import { FISHING_ZONES } from '../utils/fishingData'
 import './FilterBar.css'
-
-const CITIES = ['Alles', 'Rotterdam', 'Schiedam', 'Delft']
 
 function FilterBar({
   cityFilter,
@@ -12,36 +11,55 @@ function FilterBar({
   onNightFilterChange,
   visibleCount
 }) {
+  const cityCount = (city) => FISHING_ZONES.filter(z => z.city === city).length
+
   return (
     <div className="filter-bar">
       <div className="filter-row filter-cities">
-        {CITIES.map(city => {
-          const value = city === 'Alles' ? 'all' : city
-          return (
-            <button
-              key={city}
-              className={`filter-btn city-btn ${cityFilter === value ? 'active' : ''}`}
-              onClick={() => onCityFilterChange(value)}
-            >
-              {city}
-            </button>
-          )
-        })}
+        <button
+          className={`filter-btn city-btn ${cityFilter === 'all' ? 'active' : ''}`}
+          onClick={() => onCityFilterChange('all')}
+        >
+          Alles ({FISHING_ZONES.length})
+        </button>
+        {['Rotterdam', 'Schiedam', 'Delft'].map(city => (
+          <button
+            key={city}
+            className={`filter-btn city-btn ${cityFilter === city ? 'active' : ''}`}
+            onClick={() => onCityFilterChange(city)}
+          >
+            {city} ({cityCount(city)})
+          </button>
+        ))}
       </div>
 
       <div className="filter-row filter-toggles">
-        <button
-          className={`filter-btn toggle-btn ${vispasFilter ? 'active' : ''}`}
-          onClick={() => onVispasFilterChange(!vispasFilter)}
-        >
-          VISpas vereist {vispasFilter ? 'aan' : 'uit'}
-        </button>
+        <div className="vispas-segment">
+          <button
+            className={`segment-btn ${vispasFilter === 'all' ? 'active' : ''}`}
+            onClick={() => onVispasFilterChange('all')}
+          >
+            Alle
+          </button>
+          <button
+            className={`segment-btn ${vispasFilter === 'free' ? 'active' : ''}`}
+            onClick={() => onVispasFilterChange('free')}
+          >
+            Vrij
+          </button>
+          <button
+            className={`segment-btn ${vispasFilter === 'required' ? 'active' : ''}`}
+            onClick={() => onVispasFilterChange('required')}
+          >
+            VISpas
+          </button>
+        </div>
 
         <button
-          className={`filter-btn toggle-btn ${nightFilter ? 'active' : ''}`}
+          className={`filter-btn night-btn ${nightFilter ? 'active' : ''}`}
           onClick={() => onNightFilterChange(!nightFilter)}
         >
-          Nachtvisserij {nightFilter ? 'aan' : 'uit'}
+          🌙 Nachtvisserij
         </button>
 
         <span className="filter-count">{visibleCount} locaties</span>

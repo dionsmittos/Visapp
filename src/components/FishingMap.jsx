@@ -105,7 +105,7 @@ function FishingMap() {
   const [userLocation, setUserLocation] = useState(null)
   const [showDisclaimer, setShowDisclaimer] = useState(true)
   const [cityFilter, setCityFilter] = useState('all')
-  const [vispasFilter, setVispasFilter] = useState(false)
+  const [vispasFilter, setVispasFilter] = useState('all')
   const [nightFilter, setNightFilter] = useState(false)
   const mapRef = useRef(null)
 
@@ -137,13 +137,20 @@ function FishingMap() {
     loadData()
   }, [])
 
+  useEffect(() => {
+    if (!showDisclaimer) return
+    const timer = setTimeout(() => setShowDisclaimer(false), 6000)
+    return () => clearTimeout(timer)
+  }, [showDisclaimer])
+
   const handleLocationFound = (lat, lng) => {
     setUserLocation({ lat, lng })
   }
 
   const filteredZones = FISHING_ZONES.filter(zone => {
     if (cityFilter !== 'all' && zone.city !== cityFilter) return false
-    if (vispasFilter && !zone.rules.requiresVispas) return false
+    if (vispasFilter === 'required' && !zone.rules.requiresVispas) return false
+    if (vispasFilter === 'free' && zone.rules.requiresVispas) return false
     if (nightFilter && !zone.rules.nightFishing) return false
     return true
   })
@@ -253,6 +260,12 @@ function FishingMap() {
 
         <MapController onLocationFound={handleLocationFound} />
       </MapContainer>
+
+      {filteredZones.length === 0 && (
+        <div className="no-results">
+          Geen vislocaties gevonden met deze filters. Pas je filters aan.
+        </div>
+      )}
 
       {/* Overlays boven de kaart */}
       <div className="map-overlays">
