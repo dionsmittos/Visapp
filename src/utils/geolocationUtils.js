@@ -117,7 +117,7 @@ export function requestUserLocation(buttonDiv, map, userMarkerRef, onLocationFou
       buttonDiv.style.pointerEvents = 'auto'
       buttonDiv.innerHTML = '📍'
       
-      onLocationFound?.()
+      onLocationFound?.(latitude, longitude)
     },
     (error) => {
       buttonDiv.style.opacity = '1'
